@@ -1,0 +1,6 @@
+#! /bin/sh
+
+#cd /home/poul/dio
+#make clean
+make cln
+#make 2>errout

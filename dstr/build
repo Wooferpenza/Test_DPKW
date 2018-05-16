@@ -1,0 +1,5 @@
+#! /bin/sh
+
+#cd /home/poul/dio
+make
+#make 2>errout

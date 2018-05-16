@@ -1,0 +1,4 @@
+kernel//home/woofer/Qt/projects/Lcomp19/dstr/ldevice.ko
+kernel//home/woofer/Qt/projects/Lcomp19/dstr/ldevpci.ko
+kernel//home/woofer/Qt/projects/Lcomp19/dstr/ldevusb.ko
+kernel//home/woofer/Qt/projects/Lcomp19/dstr/ldevpcibm.ko

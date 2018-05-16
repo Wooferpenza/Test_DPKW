@@ -1,0 +1,1 @@
+cmd_/home/woofer/Qt/projects/Lcomp19/dstr/ldevpcibm.o := ld -m elf_x86_64   -r -o /home/woofer/Qt/projects/Lcomp19/dstr/ldevpcibm.o /home/woofer/Qt/projects/Lcomp19/dstr/l791.o /home/woofer/Qt/projects/Lcomp19/dstr/ldevpcib.o 

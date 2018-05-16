@@ -1,0 +1,1 @@
+cmd_/home/woofer/Qt/projects/Lcomp19/dstr/ldevice.ko := ld -r -m elf_x86_64 -T ./scripts/module-common.lds --build-id  -o /home/woofer/Qt/projects/Lcomp19/dstr/ldevice.ko /home/woofer/Qt/projects/Lcomp19/dstr/ldevice.o /home/woofer/Qt/projects/Lcomp19/dstr/ldevice.mod.o

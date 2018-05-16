@@ -1,0 +1,24 @@
+#! /bin/sh
+
+# utf8 encoding
+# use iconv -f UTF8 -t KOI8-R <file> -o <out file>
+# for koi8r or else...
+
+rmmod ldevpcibm.ko
+rmmod ldevusb.ko
+rmmod ldevpci.ko
+rmmod ldevice.ko
+
+
+insmod ldevice.ko howmany=5
+insmod ldevpcibm.ko
+insmod ldevpci.ko
+insmod ldevusb.ko
+
+#///////////////////////////////////////////////////////
+# устанавливает драйвера для PCI и USB модулей.
+# Линки устройств создаются автоматически, предварительно
+# надо скопировать lcard.rules в папку /etc/udev/rules.d
+# чтобы заработал udev. Нумерация слотов сквозная....ldev0, ldev1....
+# Параметер howmany задает количество создаваемых линков (max 128).
+#////////////////////////////////////////////////////////

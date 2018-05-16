@@ -1,0 +1,7 @@
+0x380724e9	ldev_add	/home/woofer/Qt/projects/Lcomp19/dstr/ldevice	EXPORT_SYMBOL
+0x00000000	LDev_Remove	/home/poul/dio/ldevice	EXPORT_SYMBOL
+0x43ded46b	ldev_remove	/home/woofer/Qt/projects/Lcomp19/dstr/ldevice	EXPORT_SYMBOL
+0x740f39db	lcard_class	/home/woofer/Qt/projects/Lcomp19/dstr/ldevice	EXPORT_SYMBOL
+0x00000000	LDev_Register	/home/poul/dio/ldevice	EXPORT_SYMBOL
+0x01aa1a54	ldev_register	/home/woofer/Qt/projects/Lcomp19/dstr/ldevice	EXPORT_SYMBOL
+0x00000000	LDev_Add	/home/poul/dio/ldevice	EXPORT_SYMBOL
