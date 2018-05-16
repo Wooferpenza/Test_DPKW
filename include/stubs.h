@@ -11,7 +11,7 @@
 #include <unistd.h>
 #include <sys/ioctl.h>
 #include <sys/mman.h>
-//#include <atomic_ops.h>
+#include <atomic_ops.h>
 #endif
 
 
