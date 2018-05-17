@@ -29,7 +29,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(E14_140,SIGNAL(Status(QString,int)),Status_String,SLOT(setText(QString)));
     connect(E14_140,SIGNAL(Progress(int)),Progress_Bar,SLOT(setValue(int)));
 
-    connect(E14_140->channel(0),SIGNAL(samplesAvailable(Channel::ADCData*,double,QMutex*)),this,SLOT(sl1(Channel::ADCData *ad, double sr, QMutex *m)));
+connect(E14_140->channel(0),SIGNAL(samplesAvailable(Channel::ADCData*,double,QMutex*)),this,SLOT(sl1(Channel::ADCData *ad, double sr, QMutex *m)));
      //  connect(E14_140->channel(1),SIGNAL(samplesAvailable(Channel::ADCData*,double,QMutex*)),this,SLOT(sl2(Channel::ADCData *, double, QMutex *)));
 
   //  connect(E14_140,SIGNAL(Half_Buffer_Full(int,double)),this,SLOT(Graph_Update(int,double)));

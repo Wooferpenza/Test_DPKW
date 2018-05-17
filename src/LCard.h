@@ -32,6 +32,7 @@ private:
     int mBand;
     int mDiv;
    // ADCData mData;
+    public:
     ADCData mSampl;
     QMutex D_mutex;                         // Мютекс для блокировки доступа к данным
 public:
@@ -43,6 +44,7 @@ public:
     void addSampl(const double &value);
     void clearSampl();
    // ADCData *data();
+
     double getData(const int &index);
      ADCData *getPSempl();
 public slots:
