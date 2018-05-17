@@ -82,6 +82,9 @@ private slots:
 
     void on_pushButton_6_clicked();
 
+    void sl1(Channel::ADCData *ad, double sr, QMutex *m);
+    void sl2(Channel::ADCData *ad, double sr, QMutex *m);
+
 
 private:
     Ui::MainWindow *ui;

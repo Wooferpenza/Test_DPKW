@@ -226,6 +226,10 @@ void LCard::setTimeCapture(int value)
 //===================================================================================
 void LCard::capture()
 {
+    for (int i=0;i<mChannel.size();i++)
+    {
+        connect(this,SIGNAL(Half_Buffer_Full(double)),mChannel.at(i),SLOT(semplesChanged(double)));
+    }
     setStatus(2);
     mStpCapture=false;
     int N_Data=mTimeCapture*mAdcPar.t1.dRate*1000;
@@ -258,22 +262,23 @@ void LCard::capture()
 
         int t3=t.elapsed();
         qDebug("ADC_Capture_Time2: %d ms", t3-t2);
-
+        for (int i=0;i<mChannel.size();i++)
+        {
+            mChannel.at(i)->clearSampl();
+        }
         int Ch=0;
         for (unsigned int i=0;i<halfBuffer();i++)
         {
             SHORT b=*(((SHORT *)mpData)+i+halfBuffer()*fl1);
-
-            mChannel.at(Ch)->addData(calibrate(Ch,(double)b));
+           // mChannel.at(Ch)->addData(calibrate(Ch,(double)b));
             mChannel.at(Ch)->addSampl(calibrate(Ch,(double)b));
-
             if((++Ch)>=mChannel.size()) {Ch=0;}
             mDataSize++;
             if (mDataSize>=N_Data||mStpCapture)
             {break;}
         }
         emit Progress((mDataSize*100)/N_Data);
-        emit Half_Buffer_Full(mDataSize,mTSample);
+        emit Half_Buffer_Full(1/mTSample);
 
         fl1=(*mpSync<=halfBuffer())? 0:1;                 // Обновляем флаг
         int t4=t.elapsed();
@@ -292,6 +297,10 @@ void LCard::capture()
 
     mpI->StopLDevice(); // Останавливаем сбор в драйвере
     qDebug("Stop Capture");
+    for (int i=0;i<mChannel.size();i++)
+    {
+        disconnect(this,SIGNAL(Half_Buffer_Full(double)),mChannel.at(i),SLOT(semplesChanged(double)));
+    }
     setStatus(3);
     emit Finished();
 
@@ -340,10 +349,16 @@ void Channel::setDiv(const int &value)
     mDiv = value;
 }
 
+void Channel::semplesChanged(double samplerate)
+{
+    emit samplesAvailable(&mSampl,1,&D_mutex);
+    qDebug("11");
+}
+
 void Channel::addData(const double &value)
 {
     D_mutex.lock();
-    mData.push_back(value);
+//    mData.push_back(value);
     D_mutex.unlock();
 }
 
@@ -354,15 +369,25 @@ void Channel::addSampl(const double &value)
     D_mutex.unlock();
 }
 
-Channel::ADCData *Channel::data()
+void Channel::clearSampl()
 {
-    return &mData;
+    mSampl.clear();
 }
+
+//Channel::ADCData *Channel::data()
+//{
+//    return &mData;
+//}
 
 double Channel::getData(const int &index)
 {
     QMutexLocker d_locker(&D_mutex);
-    return mData.at(index);
+  //  return mData.at(index);
+}
+
+Channel::ADCData *Channel::getPSempl()
+{
+    return &mSampl;
 }
 
 Channel::Channel(QObject *parent): QObject(parent)

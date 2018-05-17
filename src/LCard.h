@@ -1,10 +1,9 @@
 #ifndef ADC_H
 #define ADC_H
 #ifdef Q_OS_LINUX
-//#define LCOMP_LINUX 1
+
 #endif
 #include <QObject>
-//#include <windows.h>
 #include <QString>
 #include <QVector>
 #include <QMutex>
@@ -23,22 +22,16 @@
 #include "..\include\create.h"
 #endif
 
-
-
-
-
-
-
-
 class Channel : public QObject
 {
      Q_OBJECT
+public:
     typedef  QVector<double> ADCData;
 private:
     int mInput;
     int mBand;
     int mDiv;
-    ADCData mData;
+   // ADCData mData;
     ADCData mSampl;
     QMutex D_mutex;                         // Мютекс для блокировки доступа к данным
 public:
@@ -48,16 +41,20 @@ public:
     int getDiv() const;
     void addData(const double &value);
     void addSampl(const double &value);
-    ADCData *data();
+    void clearSampl();
+   // ADCData *data();
     double getData(const int &index);
+     ADCData *getPSempl();
 public slots:
     void setInput(const int &value);
     void setBand(const int &value);
     void setDiv(const int &value);
+    void semplesChanged(double samplerate);
 signals:
     void inputChanged(int);
     void bandChanged(int);
     void divChanged(int);
+    void samplesAvailable(ADCData*,double ,QMutex*);
 };
 
 class LCard : public QObject
@@ -105,7 +102,7 @@ signals:
     void Connect(bool);                              // Сигнал изменения статуса устройства(подключено/не подключено)
     void Status(QString,int);                        // Статус устройства
     void Progress(int);
-    void Half_Buffer_Full(int mDataSize,double t);   // Половина буфера заполнена
+    void Half_Buffer_Full(double samplerate);   // Половина буфера заполнена
     void Finished();                                 // Сбор данных завершен
     void samplingRateChanged(double);
     void timeCaptureChanged(int);
