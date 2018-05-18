@@ -141,37 +141,37 @@ BOOL LDeviceIoControl(HANDLE hDevice,
 //        return _new;
 //}
 
-static /*__inline__*/ void atomic_inc(atomic_t *v)
-{
-#ifdef LCOMP_LINUX
-// this for x86 x64 on asm
-//   __asm__ __volatile__(
-//      LOCK_PREFIX "incl %0"
-//      :"+m" (v->counter));
-//===============================
+//static /*__inline__*/ void atomic_inc(atomic_t *v)
+//{
+//#ifdef LCOMP_LINUX
+//// this for x86 x64 on asm
+////   __asm__ __volatile__(
+////      LOCK_PREFIX "incl %0"
+////      :"+m" (v->counter));
+////===============================
 
-//    atomic_add(&v->counter,1); // arm with helper
-    AO_fetch_and_add1(&v->counter);
-#else
-   InterlockedIncrement((LONG *)&(v->counter));
-#endif
-}
+////    atomic_add(&v->counter,1); // arm with helper
+//    AO_fetch_and_add1(&v->counter);
+//#else
+//   InterlockedIncrement((LONG *)&(v->counter));
+//#endif
+//}
 
-static /*__inline__*/ void atomic_dec(atomic_t *v)
-{
-#ifdef LCOMP_LINUX
-// this for x86 x64 on asm
-//   __asm__ __volatile__(
-//      LOCK_PREFIX "decl %0"
-//      :"+m" (v->counter));
-// =============================
+//static /*__inline__*/ void atomic_dec(atomic_t *v)
+//{
+//#ifdef LCOMP_LINUX
+//// this for x86 x64 on asm
+////   __asm__ __volatile__(
+////      LOCK_PREFIX "decl %0"
+////      :"+m" (v->counter));
+//// =============================
 
-//    atomic_add(&v->counter,-1); // arm with helper
-    AO_fetch_and_sub1(&v->counter);
-#else
-   InterlockedDecrement((LONG *)&(v->counter));
-#endif
-}
+////    atomic_add(&v->counter,-1); // arm with helper
+//    AO_fetch_and_sub1(&v->counter);
+//#else
+//   InterlockedDecrement((LONG *)&(v->counter));
+//#endif
+//}
 
 #endif
 

@@ -63,6 +63,7 @@ int Sensor::Resampling(QVector<double> *Result, QVector<double> *Dat, QVector<do
         int progress=i*100/(N-1);
         if ((progress-oldProgress)>=5) {emit OperationProgress(progress);oldProgress=progress;}
     }
+    return 0;
 }
 
 void Sensor::Set_Time(double *Tm)

@@ -228,8 +228,9 @@ void LCard::capture()
 {
     for (int i=0;i<mChannel.size();i++)
     {
-        connect(this,SIGNAL(Half_Buffer_Full(double)),mChannel.at(i),SLOT(semplesChanged(double)));
+        connect(this,SIGNAL(Half_Buffer_Full(double,bool)),mChannel.at(i),SLOT(semplesChanged(double,bool)));
     }
+    bool append=false;
     setStatus(2);
     mStpCapture=false;
     int N_Data=mTimeCapture*mAdcPar.t1.dRate*1000;
@@ -240,7 +241,6 @@ void LCard::capture()
     t.start();
 
     mpI->StartLDevice(); // Запускаем сбор в драйвере
-
     int fl2,fl1 = fl2 = (*mpSync<=halfBuffer())? 0:1; // Настроили флаги
     int t1=t.elapsed();
     qDebug("ADC_Capture_Time1: %d ms", t1);
@@ -262,24 +262,31 @@ void LCard::capture()
 
         int t3=t.elapsed();
         qDebug("ADC_Capture_Time2: %d ms", t3-t2);
+
         for (int i=0;i<mChannel.size();i++)
         {
             mChannel.at(i)->clearSampl();
+            mChannel.at(i)->getPSamplMutex()->lock();
         }
+
         int Ch=0;
+
         for (unsigned int i=0;i<halfBuffer();i++)
         {
             SHORT b=*(((SHORT *)mpData)+i+halfBuffer()*fl1);
-           // mChannel.at(Ch)->addData(calibrate(Ch,(double)b));
             mChannel.at(Ch)->addSampl(calibrate(Ch,(double)b));
             if((++Ch)>=mChannel.size()) {Ch=0;}
             mDataSize++;
             if (mDataSize>=N_Data||mStpCapture)
             {break;}
         }
+        for (int i=0;i<mChannel.size();i++)
+        {
+            mChannel.at(i)->getPSamplMutex()->unlock();
+        }
         emit Progress((mDataSize*100)/N_Data);
-        emit Half_Buffer_Full(1/mTSample);
-
+        emit Half_Buffer_Full(1/mTSample,append);
+        append =true;
         fl1=(*mpSync<=halfBuffer())? 0:1;                 // Обновляем флаг
         int t4=t.elapsed();
 
@@ -294,17 +301,14 @@ void LCard::capture()
         //Sleep(200); // если собираем медленно то можно и спать больше
     }
     while(mDataSize<N_Data&&(!mStpCapture));
-
     mpI->StopLDevice(); // Останавливаем сбор в драйвере
     qDebug("Stop Capture");
     for (int i=0;i<mChannel.size();i++)
     {
-        disconnect(this,SIGNAL(Half_Buffer_Full(double)),mChannel.at(i),SLOT(semplesChanged(double)));
+        disconnect(this,SIGNAL(Half_Buffer_Full(double, bool)),mChannel.at(i),SLOT(semplesChanged(double, bool)));
     }
     setStatus(3);
     emit Finished();
-
-
 }
 //==================================================================================
 void LCard::updateAdcPar()
@@ -349,24 +353,17 @@ void Channel::setDiv(const int &value)
     mDiv = value;
 }
 
-void Channel::semplesChanged(double samplerate)
+void Channel::semplesChanged(double samplerate, bool append)
 {
-    emit samplesAvailable(&mSampl,1,&D_mutex);
+    emit samplesAvailable(samplerate,&mSampl,&mSamplMutex, append);
     qDebug("11");
-}
-
-void Channel::addData(const double &value)
-{
-    D_mutex.lock();
-//    mData.push_back(value);
-    D_mutex.unlock();
 }
 
 void Channel::addSampl(const double &value)
 {
-    D_mutex.lock();
+    mSamplMutex.lock();
     mSampl.push_back(value);
-    D_mutex.unlock();
+    mSamplMutex.unlock();
 }
 
 void Channel::clearSampl()
@@ -374,20 +371,14 @@ void Channel::clearSampl()
     mSampl.clear();
 }
 
-//Channel::ADCData *Channel::data()
-//{
-//    return &mData;
-//}
-
-double Channel::getData(const int &index)
-{
-    QMutexLocker d_locker(&D_mutex);
-  //  return mData.at(index);
-}
-
-Channel::ADCData *Channel::getPSempl()
+ADCData *Channel::getPSempl()
 {
     return &mSampl;
+}
+
+QMutex *Channel::getPSamplMutex()
+{
+    return &mSamplMutex;
 }
 
 Channel::Channel(QObject *parent): QObject(parent)

@@ -26,7 +26,7 @@ private slots:
     void Save_Setting();
     void Load_Setting();
     void on_action_3_triggered();
-    void Graph_Update(int X_Count,double t);
+    void Graph_Update(double samplerate, ADCData *sampl, QMutex *mutex, bool append);
 
     void Init_ADC();
 
@@ -81,10 +81,6 @@ private slots:
     void on_tabWidget_currentChanged(int index);
 
     void on_pushButton_6_clicked();
-
-    void sl1(Channel::ADCData *ad, double sr, QMutex *m);
-    void sl2(Channel::ADCData *ad, double sr, QMutex *m);
-
 
 private:
     Ui::MainWindow *ui;

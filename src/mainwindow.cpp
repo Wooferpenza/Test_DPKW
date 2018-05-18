@@ -24,15 +24,13 @@ MainWindow::MainWindow(QWidget *parent) :
     Progress_Bar->setMinimum(0);
     Progress_Bar->setMaximum(100);
     E14_140->addChannel();
-    E14_140->addChannel();
+  //  E14_140->addChannel();
     connect(E14_140,SIGNAL(Connect(bool)),Status_Check,SLOT(setChecked(bool)));
     connect(E14_140,SIGNAL(Status(QString,int)),Status_String,SLOT(setText(QString)));
     connect(E14_140,SIGNAL(Progress(int)),Progress_Bar,SLOT(setValue(int)));
+    connect(E14_140->channel(0),SIGNAL(samplesAvailable(double, ADCData*,QMutex*, bool)),this,SLOT(Graph_Update(double,ADCData*,QMutex*, bool)));
+ //   connect(E14_140->channel(1),SIGNAL(samplesAvailable(double, ADCData*,QMutex*)),this,SLOT(sl2(double,ADCData*,QMutex*)));
 
-connect(E14_140->channel(0),SIGNAL(samplesAvailable(Channel::ADCData*,double,QMutex*)),this,SLOT(sl1(Channel::ADCData *ad, double sr, QMutex *m)));
-     //  connect(E14_140->channel(1),SIGNAL(samplesAvailable(Channel::ADCData*,double,QMutex*)),this,SLOT(sl2(Channel::ADCData *, double, QMutex *)));
-
-  //  connect(E14_140,SIGNAL(Half_Buffer_Full(int,double)),this,SLOT(Graph_Update(int,double)));
     connect(ui->Sampling_Rate,SIGNAL(valueChanged(int)),E14_140,SLOT(setSamplingRate(int)));
    // connect(ui->Sampling_Rate,SIGNAL(actionTriggered(int)),E14_140,SLOT(Set_Sampling_Rate(int)));
     connect(E14_140,SIGNAL(samplingRateChanged(double)),ui->lcdNumber,SLOT(display(double)));
@@ -153,34 +151,31 @@ void MainWindow::Init_ADC()
     }
 }
 
-void MainWindow::Graph_Update(int X_Count, double t)
+void MainWindow::Graph_Update(double  samplerate, ADCData* sampl, QMutex *mutex, bool append)
 {
-    T_Sample=t;
+    static long T=0;
+    if (!append) T=0;
+    T_Sample=1/samplerate;
+
     QTime tt;
     tt.start();
-  //  QVector<double> X(100);
-  //  QVector<double> Y(100);
+
     double Average=0;
-    for(int i=X_Begin;i<X_Count;i++)
+    long samplSize=sampl->size();
+    mutex->lock();
+    for(long i=0;i<samplSize;i++)
     {
-       // X.push_back(i*t);
-        double D=E14_140->channel(0)->getData(i);
-       // Y.push_back(D);
-         ui->Graph->graph(0)->addData(i*t,D);
-     //   Data.push_back(D);
-        Average+=D;
+          double D=sampl->at(i);
+          ui->Graph->graph(0)->addData((i+T)*T_Sample,D);
+          Average+=D;
     }
-    Average=Average/(X_Count-X_Begin);
+    mutex->unlock();
+    T+=samplSize;
+    Average=Average/samplSize;
     ui->lcdNumber_2->display(Average);
-    X_Begin=X_Count;
     qDebug("Graph_Time1: %d ms", tt.elapsed());
     ui->Graph->yAxis->setRange(ui->Band_lcdNumber->value()*-1-1,ui->Band_lcdNumber->value()+1);
-
-  //  ui->Graph->graph(0)->addData(X,Y);
-    //
-    // создаем график и добавляем данные:
-
-    ui->Graph->xAxis->setRange((X_Count-50000)/100,X_Count/100);
+  //  ui->Graph->xAxis->setRange((samplSize-50000)/100,samplSize/100);
     qDebug("Graph_Time2: %d ms", tt.elapsed());
     ui->Graph->replot();
     qDebug("Graph_Time3: %d ms", tt.elapsed());
@@ -527,17 +522,3 @@ void MainWindow::on_pushButton_6_clicked()
 //    E14_140->removeChannel(E14_140->channel(0));
   //    qDebug("ADC test: %d ",  E14_140->channelCount());
 }
-
-void MainWindow::sl1(Channel::ADCData *ad, double sr, QMutex *m)
-{
-    qDebug("1");
-  //  qDebug("1: %f",sr);
-}
-
-void MainWindow::sl2(Channel::ADCData *ad, double sr, QMutex *m)
-{
-     qDebug("2");
-   //   qDebug("2: %f",sr);
-}
-
-

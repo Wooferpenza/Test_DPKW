@@ -21,44 +21,38 @@
 #include "..\include\ifc_ldev.h"
 #include "..\include\create.h"
 #endif
-
+ typedef  QVector<double> ADCData;
+//-------------------------------------------------------------------------------------------
 class Channel : public QObject
 {
      Q_OBJECT
-public:
-    typedef  QVector<double> ADCData;
 private:
-    int mInput;
-    int mBand;
-    int mDiv;
-   // ADCData mData;
-    public:
-    ADCData mSampl;
-    QMutex D_mutex;                         // Мютекс для блокировки доступа к данным
+    int mInput;                             // Физический вход
+    int mBand;                              // Диапазон
+    int mDiv;                               // Делитель
+    ADCData mSampl;                         // Массив данных
+    QMutex mSamplMutex;                     // Мютекс для блокировки доступа к данным
 public:
     explicit Channel(QObject *parent = 0);
     int getInput() const;
     int getBand() const;
     int getDiv() const;
-    void addData(const double &value);
-    void addSampl(const double &value);
-    void clearSampl();
-   // ADCData *data();
-
-    double getData(const int &index);
-     ADCData *getPSempl();
+    void addSampl(const double &value);     // Добавить значение в массив данных
+    void clearSampl();                      // Очистить массив данных
+    ADCData *getPSempl();                   // Получить указатель на массив данных
+    QMutex *getPSamplMutex();               // Получить указатель на мютекс
 public slots:
     void setInput(const int &value);
     void setBand(const int &value);
     void setDiv(const int &value);
-    void semplesChanged(double samplerate);
+    void semplesChanged(double samplerate, bool append);
 signals:
     void inputChanged(int);
     void bandChanged(int);
     void divChanged(int);
-    void samplesAvailable(ADCData*,double ,QMutex*);
+    void samplesAvailable(double,ADCData*,QMutex*,bool);    // Данные обновлены
 };
-
+//--------------------------------------------------------------------------------------------------------
 class LCard : public QObject
 {
     Q_OBJECT
@@ -79,7 +73,7 @@ private:
 
     void setStatus(int St);                  // Установка статуса устройства
     void adcParDefault();                    // Сброс на параметры по умолчанию
-    bool writeAdcPar();                       // Запись параметров в устройство
+    bool writeAdcPar();                      // Запись параметров в устройство
     ULONG halfBuffer();                      // Получить половину буфера
     double calibrate(int Ch,double Data);    // Калибровка измеренных данных
     void capture();                          //Сбор данных
@@ -98,14 +92,14 @@ public:
     Channel *channel(const int &index) const;
     Channel *channel() const;
     int channelCount() const;
-    bool Init(ULONG Slot);                              // Инициализация устройства
+    bool Init(ULONG Slot);                                  // Инициализация устройства
 
 signals:
-    void Connect(bool);                              // Сигнал изменения статуса устройства(подключено/не подключено)
-    void Status(QString,int);                        // Статус устройства
+    void Connect(bool);                                     // Сигнал изменения статуса устройства(подключено/не подключено)
+    void Status(QString,int);                               // Статус устройства
     void Progress(int);
-    void Half_Buffer_Full(double samplerate);   // Половина буфера заполнена
-    void Finished();                                 // Сбор данных завершен
+    void Half_Buffer_Full(double samplerate, bool append);  // Половина буфера заполнена
+    void Finished();                                        // Сбор данных завершен
     void samplingRateChanged(double);
     void timeCaptureChanged(int);
 private slots:
