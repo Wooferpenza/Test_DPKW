@@ -266,7 +266,7 @@ void LCard::capture()
         for (int i=0;i<mChannel.size();i++)
         {
             mChannel.at(i)->clearSampl();
-            mChannel.at(i)->getPSamplMutex()->lock();
+         //   mChannel.at(i)->getPSamplMutex()->lock();
         }
 
         int Ch=0;
@@ -282,7 +282,7 @@ void LCard::capture()
         }
         for (int i=0;i<mChannel.size();i++)
         {
-            mChannel.at(i)->getPSamplMutex()->unlock();
+          //  mChannel.at(i)->getPSamplMutex()->unlock();
         }
         emit Progress((mDataSize*100)/N_Data);
         emit Half_Buffer_Full(1/mTSample,append);
@@ -361,9 +361,7 @@ void Channel::semplesChanged(double samplerate, bool append)
 
 void Channel::addSampl(const double &value)
 {
-    mSamplMutex.lock();
     mSampl.push_back(value);
-    mSamplMutex.unlock();
 }
 
 void Channel::clearSampl()

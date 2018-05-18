@@ -248,344 +248,683 @@
            <enum>QLayout::SetMinimumSize</enum>
           </property>
           <item>
-           <widget class="QGroupBox" name="groupBox">
+           <widget class="QTabWidget" name="tabWidget_3">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
-            <property name="maximumSize">
+            <property name="minimumSize">
              <size>
-              <width>86</width>
-              <height>112</height>
+              <width>168</width>
+              <height>140</height>
              </size>
             </property>
-            <property name="title">
-             <string>Частота, кГц</string>
+            <property name="currentIndex">
+             <number>1</number>
             </property>
-            <layout class="QVBoxLayout" name="verticalLayout">
-             <item>
-              <widget class="QDial" name="Sampling_Rate">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>50</width>
-                 <height>50</height>
-                </size>
-               </property>
-               <property name="minimum">
-                <number>50</number>
-               </property>
-               <property name="maximum">
-                <number>200</number>
-               </property>
-               <property name="singleStep">
-                <number>10</number>
-               </property>
-               <property name="pageStep">
-                <number>10</number>
-               </property>
-               <property name="sliderPosition">
-                <number>50</number>
-               </property>
-               <property name="tracking">
-                <bool>true</bool>
-               </property>
-               <property name="wrapping">
-                <bool>false</bool>
-               </property>
-               <property name="notchesVisible">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLCDNumber" name="lcdNumber">
-               <property name="maximumSize">
-                <size>
-                 <width>50</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-              </widget>
-             </item>
-            </layout>
+            <property name="documentMode">
+             <bool>false</bool>
+            </property>
+            <property name="tabsClosable">
+             <bool>false</bool>
+            </property>
+            <widget class="QWidget" name="tab_6">
+             <attribute name="title">
+              <string>Развертка</string>
+             </attribute>
+             <widget class="QGroupBox" name="groupBox">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>86</width>
+                <height>112</height>
+               </rect>
+              </property>
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>86</width>
+                <height>112</height>
+               </size>
+              </property>
+              <property name="title">
+               <string>Частота, кГц</string>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout">
+               <item>
+                <widget class="QDial" name="Sampling_Rate">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>50</width>
+                   <height>50</height>
+                  </size>
+                 </property>
+                 <property name="minimum">
+                  <number>50</number>
+                 </property>
+                 <property name="maximum">
+                  <number>200</number>
+                 </property>
+                 <property name="singleStep">
+                  <number>10</number>
+                 </property>
+                 <property name="pageStep">
+                  <number>10</number>
+                 </property>
+                 <property name="sliderPosition">
+                  <number>50</number>
+                 </property>
+                 <property name="tracking">
+                  <bool>true</bool>
+                 </property>
+                 <property name="wrapping">
+                  <bool>false</bool>
+                 </property>
+                 <property name="notchesVisible">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLCDNumber" name="lcdNumber">
+                 <property name="maximumSize">
+                  <size>
+                   <width>50</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QGroupBox" name="groupBox_2">
+              <property name="geometry">
+               <rect>
+                <x>90</x>
+                <y>0</y>
+                <width>70</width>
+                <height>112</height>
+               </rect>
+              </property>
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>70</width>
+                <height>112</height>
+               </size>
+              </property>
+              <property name="title">
+               <string>Время, с</string>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_2">
+               <item>
+                <widget class="QDial" name="Time_Capture_dial">
+                 <property name="maximumSize">
+                  <size>
+                   <width>50</width>
+                   <height>50</height>
+                  </size>
+                 </property>
+                 <property name="minimum">
+                  <number>10</number>
+                 </property>
+                 <property name="maximum">
+                  <number>60</number>
+                 </property>
+                 <property name="singleStep">
+                  <number>10</number>
+                 </property>
+                 <property name="pageStep">
+                  <number>10</number>
+                 </property>
+                 <property name="notchesVisible">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLCDNumber" name="Time_Capture_lcdNumber">
+                 <property name="maximumSize">
+                  <size>
+                   <width>50</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+            <widget class="QWidget" name="tab_7">
+             <attribute name="title">
+              <string>Синхро</string>
+             </attribute>
+            </widget>
            </widget>
           </item>
           <item>
-           <widget class="QGroupBox" name="groupBox_2">
+           <widget class="QTabWidget" name="tabWidget_2">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
-            <property name="maximumSize">
+            <property name="minimumSize">
              <size>
-              <width>70</width>
-              <height>112</height>
+              <width>400</width>
+              <height>140</height>
              </size>
             </property>
-            <property name="title">
-             <string>Время, с</string>
+            <property name="currentIndex">
+             <number>1</number>
             </property>
-            <layout class="QVBoxLayout" name="verticalLayout_2">
-             <item>
-              <widget class="QDial" name="Time_Capture_dial">
-               <property name="maximumSize">
-                <size>
-                 <width>50</width>
-                 <height>50</height>
-                </size>
-               </property>
-               <property name="minimum">
-                <number>10</number>
-               </property>
-               <property name="maximum">
-                <number>60</number>
-               </property>
-               <property name="singleStep">
-                <number>10</number>
-               </property>
-               <property name="pageStep">
-                <number>10</number>
-               </property>
-               <property name="notchesVisible">
-                <bool>true</bool>
+            <widget class="QWidget" name="tab_4">
+             <attribute name="title">
+              <string>1</string>
+             </attribute>
+             <widget class="QGroupBox" name="groupBox_7">
+              <property name="geometry">
+               <rect>
+                <x>70</x>
+                <y>0</y>
+                <width>101</width>
+                <height>112</height>
+               </rect>
+              </property>
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>101</width>
+                <height>112</height>
+               </size>
+              </property>
+              <property name="title">
+               <string>Переключатель</string>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_12">
+               <item>
+                <widget class="QDial" name="Switch_dial_2">
+                 <property name="minimumSize">
+                  <size>
+                   <width>50</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>50</width>
+                   <height>50</height>
+                  </size>
+                 </property>
+                 <property name="minimum">
+                  <number>1</number>
+                 </property>
+                 <property name="maximum">
+                  <number>10</number>
+                 </property>
+                 <property name="pageStep">
+                  <number>1</number>
+                 </property>
+                 <property name="notchesVisible">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLCDNumber" name="Switch_lcdNumber_2">
+                 <property name="maximumSize">
+                  <size>
+                   <width>50</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="frameShape">
+                  <enum>QFrame::Box</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Raised</enum>
+                 </property>
+                 <property name="smallDecimalPoint">
+                  <bool>false</bool>
+                 </property>
+                 <property name="segmentStyle">
+                  <enum>QLCDNumber::Filled</enum>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QGroupBox" name="groupBox_8">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>70</width>
+                <height>112</height>
+               </rect>
+              </property>
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>70</width>
+                <height>112</height>
+               </size>
+              </property>
+              <property name="title">
+               <string>Канал</string>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_13">
+               <item>
+                <widget class="QDial" name="Channel_dial_2">
+                 <property name="maximumSize">
+                  <size>
+                   <width>50</width>
+                   <height>50</height>
+                  </size>
+                 </property>
+                 <property name="minimum">
+                  <number>1</number>
+                 </property>
+                 <property name="maximum">
+                  <number>8</number>
+                 </property>
+                 <property name="pageStep">
+                  <number>1</number>
+                 </property>
+                 <property name="value">
+                  <number>1</number>
+                 </property>
+                 <property name="notchesVisible">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLCDNumber" name="Channel_lcdNumber_2">
+                 <property name="maximumSize">
+                  <size>
+                   <width>50</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QGroupBox" name="groupBox_9">
+              <property name="geometry">
+               <rect>
+                <x>170</x>
+                <y>0</y>
+                <width>81</width>
+                <height>112</height>
+               </rect>
+              </property>
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>81</width>
+                <height>112</height>
+               </size>
+              </property>
+              <property name="title">
+               <string>Диапазон, В</string>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_14">
+               <item>
+                <widget class="QDial" name="Band_dial_2">
+                 <property name="maximumSize">
+                  <size>
+                   <width>50</width>
+                   <height>50</height>
+                  </size>
+                 </property>
+                 <property name="maximum">
+                  <number>3</number>
+                 </property>
+                 <property name="pageStep">
+                  <number>1</number>
+                 </property>
+                 <property name="wrapping">
+                  <bool>false</bool>
+                 </property>
+                 <property name="notchesVisible">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLCDNumber" name="Band_lcdNumber_2">
+                 <property name="maximumSize">
+                  <size>
+                   <width>50</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QGroupBox" name="groupBox_10">
+              <property name="geometry">
+               <rect>
+                <x>250</x>
+                <y>0</y>
+                <width>81</width>
+                <height>112</height>
+               </rect>
+              </property>
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>81</width>
+                <height>112</height>
+               </size>
+              </property>
+              <property name="title">
+               <string>Напряжение</string>
+              </property>
+              <widget class="QLCDNumber" name="lcdNumber_3">
+               <property name="geometry">
+                <rect>
+                 <x>0</x>
+                 <y>80</y>
+                 <width>64</width>
+                 <height>23</height>
+                </rect>
                </property>
               </widget>
-             </item>
-             <item>
-              <widget class="QLCDNumber" name="Time_Capture_lcdNumber">
-               <property name="maximumSize">
-                <size>
-                 <width>50</width>
-                 <height>16777215</height>
-                </size>
+             </widget>
+            </widget>
+            <widget class="QWidget" name="tab_5">
+             <attribute name="title">
+              <string>2</string>
+             </attribute>
+             <widget class="QGroupBox" name="groupBox_3">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>70</width>
+                <height>112</height>
+               </rect>
+              </property>
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>70</width>
+                <height>112</height>
+               </size>
+              </property>
+              <property name="title">
+               <string>Канал</string>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_3">
+               <item>
+                <widget class="QDial" name="Channel_dial">
+                 <property name="maximumSize">
+                  <size>
+                   <width>50</width>
+                   <height>50</height>
+                  </size>
+                 </property>
+                 <property name="minimum">
+                  <number>1</number>
+                 </property>
+                 <property name="maximum">
+                  <number>8</number>
+                 </property>
+                 <property name="pageStep">
+                  <number>1</number>
+                 </property>
+                 <property name="value">
+                  <number>1</number>
+                 </property>
+                 <property name="notchesVisible">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLCDNumber" name="Channel_lcdNumber">
+                 <property name="maximumSize">
+                  <size>
+                   <width>50</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QGroupBox" name="groupBox_4">
+              <property name="geometry">
+               <rect>
+                <x>80</x>
+                <y>0</y>
+                <width>101</width>
+                <height>112</height>
+               </rect>
+              </property>
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>101</width>
+                <height>112</height>
+               </size>
+              </property>
+              <property name="title">
+               <string>Переключатель</string>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_4">
+               <item>
+                <widget class="QDial" name="Switch_dial">
+                 <property name="minimumSize">
+                  <size>
+                   <width>50</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>50</width>
+                   <height>50</height>
+                  </size>
+                 </property>
+                 <property name="minimum">
+                  <number>1</number>
+                 </property>
+                 <property name="maximum">
+                  <number>10</number>
+                 </property>
+                 <property name="pageStep">
+                  <number>1</number>
+                 </property>
+                 <property name="notchesVisible">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLCDNumber" name="Switch_lcdNumber">
+                 <property name="maximumSize">
+                  <size>
+                   <width>50</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="frameShape">
+                  <enum>QFrame::Box</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Raised</enum>
+                 </property>
+                 <property name="smallDecimalPoint">
+                  <bool>false</bool>
+                 </property>
+                 <property name="segmentStyle">
+                  <enum>QLCDNumber::Filled</enum>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QGroupBox" name="groupBox_5">
+              <property name="geometry">
+               <rect>
+                <x>190</x>
+                <y>0</y>
+                <width>81</width>
+                <height>112</height>
+               </rect>
+              </property>
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>81</width>
+                <height>112</height>
+               </size>
+              </property>
+              <property name="title">
+               <string>Диапазон, В</string>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_5">
+               <item>
+                <widget class="QDial" name="Band_dial">
+                 <property name="maximumSize">
+                  <size>
+                   <width>50</width>
+                   <height>50</height>
+                  </size>
+                 </property>
+                 <property name="maximum">
+                  <number>3</number>
+                 </property>
+                 <property name="pageStep">
+                  <number>1</number>
+                 </property>
+                 <property name="wrapping">
+                  <bool>false</bool>
+                 </property>
+                 <property name="notchesVisible">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLCDNumber" name="Band_lcdNumber">
+                 <property name="maximumSize">
+                  <size>
+                   <width>50</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QGroupBox" name="groupBox_6">
+              <property name="geometry">
+               <rect>
+                <x>280</x>
+                <y>0</y>
+                <width>81</width>
+                <height>112</height>
+               </rect>
+              </property>
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>81</width>
+                <height>112</height>
+               </size>
+              </property>
+              <property name="title">
+               <string>Напряжение</string>
+              </property>
+              <widget class="QLCDNumber" name="lcdNumber_2">
+               <property name="geometry">
+                <rect>
+                 <x>0</x>
+                 <y>80</y>
+                 <width>64</width>
+                 <height>23</height>
+                </rect>
                </property>
               </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item>
-           <widget class="QGroupBox" name="groupBox_3">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>70</width>
-              <height>112</height>
-             </size>
-            </property>
-            <property name="title">
-             <string>Канал</string>
-            </property>
-            <layout class="QVBoxLayout" name="verticalLayout_3">
-             <item>
-              <widget class="QDial" name="Channel_dial">
-               <property name="maximumSize">
-                <size>
-                 <width>50</width>
-                 <height>50</height>
-                </size>
-               </property>
-               <property name="minimum">
-                <number>1</number>
-               </property>
-               <property name="maximum">
-                <number>8</number>
-               </property>
-               <property name="pageStep">
-                <number>1</number>
-               </property>
-               <property name="value">
-                <number>1</number>
-               </property>
-               <property name="notchesVisible">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLCDNumber" name="Channel_lcdNumber">
-               <property name="maximumSize">
-                <size>
-                 <width>50</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item>
-           <widget class="QGroupBox" name="groupBox_4">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>101</width>
-              <height>112</height>
-             </size>
-            </property>
-            <property name="title">
-             <string>Переключатель</string>
-            </property>
-            <layout class="QVBoxLayout" name="verticalLayout_4">
-             <item>
-              <widget class="QDial" name="Switch_dial">
-               <property name="minimumSize">
-                <size>
-                 <width>50</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>50</width>
-                 <height>50</height>
-                </size>
-               </property>
-               <property name="minimum">
-                <number>1</number>
-               </property>
-               <property name="maximum">
-                <number>10</number>
-               </property>
-               <property name="pageStep">
-                <number>1</number>
-               </property>
-               <property name="notchesVisible">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLCDNumber" name="Switch_lcdNumber">
-               <property name="maximumSize">
-                <size>
-                 <width>50</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="font">
-                <font>
-                 <weight>75</weight>
-                 <bold>true</bold>
-                </font>
-               </property>
-               <property name="frameShape">
-                <enum>QFrame::Box</enum>
-               </property>
-               <property name="frameShadow">
-                <enum>QFrame::Raised</enum>
-               </property>
-               <property name="smallDecimalPoint">
-                <bool>false</bool>
-               </property>
-               <property name="segmentStyle">
-                <enum>QLCDNumber::Filled</enum>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item>
-           <widget class="QGroupBox" name="groupBox_5">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>81</width>
-              <height>112</height>
-             </size>
-            </property>
-            <property name="title">
-             <string>Диапазон, В</string>
-            </property>
-            <layout class="QVBoxLayout" name="verticalLayout_5">
-             <item>
-              <widget class="QDial" name="Band_dial">
-               <property name="maximumSize">
-                <size>
-                 <width>50</width>
-                 <height>50</height>
-                </size>
-               </property>
-               <property name="maximum">
-                <number>3</number>
-               </property>
-               <property name="pageStep">
-                <number>1</number>
-               </property>
-               <property name="wrapping">
-                <bool>false</bool>
-               </property>
-               <property name="notchesVisible">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLCDNumber" name="Band_lcdNumber">
-               <property name="maximumSize">
-                <size>
-                 <width>50</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item>
-           <widget class="QGroupBox" name="groupBox_6">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>81</width>
-              <height>112</height>
-             </size>
-            </property>
-            <property name="title">
-             <string>Напряжение</string>
-            </property>
-            <widget class="QLCDNumber" name="lcdNumber_2">
-             <property name="geometry">
-              <rect>
-               <x>0</x>
-               <y>80</y>
-               <width>64</width>
-               <height>23</height>
-              </rect>
-             </property>
+             </widget>
             </widget>
            </widget>
           </item>
