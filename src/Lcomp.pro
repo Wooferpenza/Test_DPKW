@@ -17,6 +17,7 @@ SOURCES += main.cpp\
            sensor.cpp \
            LCard.cpp \
            qcustomplot.cpp \
+    datastorrage.cpp
 
 win32:SOURCES +=../include/create.cpp
 
@@ -41,7 +42,8 @@ HEADERS  += mainwindow.h \
     ../include/stubs.h \
     sensor.h \
     LCard.h \
-    qcustomplot.h
+    qcustomplot.h \
+    datastorrage.h
 
 
 
